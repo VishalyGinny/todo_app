@@ -2,24 +2,28 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="flex flex-col h-screen bg-background">
-      <header className="bg-primary text-primary-foreground py-4 px-6 shadow">
+      <header className="bg-black text-primary-foreground py-4 px-6 shadow flex justify-between items-center">
         <h1 className="text-2xl font-bold">To-do List</h1>
+        <Button variant="secondary" asChild className="rounded-md px-4 py-2">
+          <Link href="/login">Login</Link>
+        </Button>
       </header>
       <main className="flex-1 p-6">
         <div className="max-w-md mx-auto">
-          <form className="flex items-center mb-4">
+          <form className="flex items-start mb-4">
             <Input
               type="text"
               placeholder="Add a new task..."
-              className="flex-1 mr-4 rounded-md border-2 border-input px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="flex-1 mr-4 rounded-full border-2 border-input px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <Button
               type="submit"
-              className="bg-primary text-primary-foreground rounded-md px-4 py-2"
+              className="bg-black text-primary-foreground rounded-md px-5 py-2"
             >
               Add
             </Button>
