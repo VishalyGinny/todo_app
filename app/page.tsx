@@ -25,13 +25,13 @@ export default function Home() {
             </Button>
           </form>
           <div className="space-y-2">
-            <div className="flex items-center bg-card text-card-foreground rounded-md px-4 py-3">
+            <div className="flex justify-center bg-card text-card-foreground rounded-md px-4 py-3">
               <Checkbox id="task-1" className="mr-4" />
               <label htmlFor="task-1" className="flex-1 text-lg">
                 Finish the design for the new website
               </label>
             </div>
-            <div className="flex items-center bg-card text-card-foreground rounded-md px-4 py-3">
+            <div className="flex justify-center bg-card text-card-foreground rounded-md px-4 py-3">
               <Checkbox id="task-2" className="mr-4" defaultChecked />
               <label
                 htmlFor="task-2"
