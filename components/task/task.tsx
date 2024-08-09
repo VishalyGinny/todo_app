@@ -6,7 +6,7 @@ import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 
 const Task = () => {
-  const tasks = [
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       title: "Finish the design for the new website",
@@ -27,7 +27,7 @@ const Task = () => {
       title: "Ship the new website",
       completed: true,
     },
-  ];
+  ]);
   return (
     <div className="space-y-2">
       {tasks.map((task) => (
@@ -35,7 +35,16 @@ const Task = () => {
           key={task.id}
           className="flex items-center gap-2 p-3 rounded-md bg-white hover:bg-muted/50 transition-colors outline-gray-800"
         >
-          <Checkbox checked={task.completed} />
+          <Checkbox
+            checked={task.completed}
+            onChange={() =>
+              setTasks(
+                tasks.map((t) =>
+                  t.id === task.id ? { ...t, completed: !task.completed } : t
+                )
+              )
+            }
+          />
           <p className="flex-1 line-clamp-1 text-muted-foreground">
             {task.title}
           </p>
