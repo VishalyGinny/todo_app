@@ -15,6 +15,30 @@ interface TaskInputProps {
 
 const TaskInput = ({ tasks, setTasks }: TaskInputProps) => {
   const [title, setTitle] = useState("");
+
+  // Function to add a new task
+  const addTask = () => {
+    if (title !== "") {
+      setTasks([
+        ...tasks,
+        {
+          id: tasks.length + 1,
+          title: title,
+          completed: false,
+        },
+      ]);
+      setTitle(""); // Reset the input field after adding the task
+    }
+  };
+
+  // Event handler for keydown events
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent form submission or page reload
+      addTask();
+    }
+  };
+
   return (
     <div className="flex items-center gap-2">
       <Input
@@ -22,38 +46,10 @@ const TaskInput = ({ tasks, setTasks }: TaskInputProps) => {
         placeholder="Add a new task..."
         defaultValue={title}
         onChange={(e) => setTitle(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && title !== "") {
-            setTasks([
-              ...tasks,
-              {
-                id: tasks.length + 1,
-                title: title,
-                completed: false,
-              },
-            ]);
-            setTitle("");
-          }
-        }}
+        onKeyDown={(e) => handleKeyDown(e)}
         className="rounded-full flex-1 bg-white text-black"
       />
-      <Button
-        onClick={() => {
-          if (title !== "") {
-            setTasks([
-              ...tasks,
-              {
-                id: tasks.length + 1,
-                title: title,
-                completed: false,
-              },
-            ]);
-            setTitle("");
-          }
-        }}
-      >
-        Add
-      </Button>
+      <Button onClick={addTask}>Add</Button>
     </div>
   );
 };
