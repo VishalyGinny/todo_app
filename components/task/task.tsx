@@ -37,7 +37,7 @@ const Task = () => {
         >
           <Checkbox
             checked={task.completed}
-            onChange={() =>
+            onCheckedChange={() =>
               setTasks(
                 tasks.map((t) =>
                   t.id === task.id ? { ...t, completed: !task.completed } : t
@@ -48,7 +48,12 @@ const Task = () => {
           <p className="flex-1 line-clamp-1 text-muted-foreground">
             {task.title}
           </p>
-          <Button variant="ghost" size="icon">
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTasks(tasks.filter((t) => t.id !== task.id))}
+          >
             <Trash2Icon className="w-4 h-4" />
           </Button>
         </div>
