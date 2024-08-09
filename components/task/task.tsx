@@ -5,29 +5,16 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 
-const Task = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Finish the design for the new website",
-      completed: true,
-    },
-    {
-      id: 2,
-      title: "Write the content for the blog post",
-      completed: false,
-    },
-    {
-      id: 3,
-      title: "Publish the blog post",
-      completed: false,
-    },
-    {
-      id: 4,
-      title: "Ship the new website",
-      completed: true,
-    },
-  ]);
+interface TaskProps {
+  tasks: {
+    id: number;
+    title: string;
+    completed: boolean;
+  }[];
+  setTasks: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const Task = ({ tasks, setTasks }: TaskProps) => {
   return (
     <div className="space-y-2">
       {tasks.map((task) => (
