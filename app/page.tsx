@@ -12,12 +12,9 @@ export default function Page() {
   return (
     <div className="flex flex-col h-screen bg-background">
       <Navbar />
-
       <div className="flex-1 p-6 space-y-4">
         <TaskInput />
-
         <Task />
-
       </div>
     </div>
   );
