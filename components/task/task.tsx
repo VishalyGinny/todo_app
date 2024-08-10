@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Trash2Icon } from "lucide-react";
+import { PencilIcon } from "lucide-react";
 import { useState } from "react";
 
 interface TaskProps {
@@ -15,6 +16,23 @@ interface TaskProps {
 }
 
 const Task = ({ tasks, setTasks }: TaskProps) => {
+  // State to track the currently editing task ID
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+
+  // Function to start editing a task
+  const startEditing = (taskId: number) => {
+    setEditingTaskId(taskId);
+  };
+
+  // Function to save edits and exit editing mode
+  const saveEdit = (taskId: number, newTitle: string) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, title: newTitle } : task
+      )
+    );
+    setEditingTaskId(null); // Exit editing mode
+  };
   return (
     <div className="space-y-2">
       {tasks.map((task) => (
@@ -32,9 +50,33 @@ const Task = ({ tasks, setTasks }: TaskProps) => {
               )
             }
           />
-          <p className="flex-1 line-clamp-1 text-muted-foreground">
-            {task.title}
-          </p>
+          {/* Render input if task is being edited, otherwise show title */}
+          {editingTaskId === task.id ? (
+            <input
+              type="text"
+              defaultValue={task.title}
+              onBlur={(e) => saveEdit(task.id, e.target.value)}
+              autoFocus
+              className="flex-1"
+              placeholder="Add a new task..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  saveEdit(task.id, e.currentTarget.value);
+                }
+              }}
+            />
+          ) : (
+            <p className="flex-1 line-clamp-1 text-muted-foreground">
+              {task.title}
+            </p>
+          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => startEditing(task.id)}
+          >
+            <PencilIcon className="w-4 h-4" />
+          </Button>
 
           <Button
             variant="ghost"
