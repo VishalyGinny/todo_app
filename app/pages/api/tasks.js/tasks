@@ -1,0 +1,23 @@
+// pages/api/tasks.js
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    try {
+      const title = req.body.title;
+
+      if (!title || typeof title !== 'string' || title.length === 0) {
+        return res.status(400).json({ error: 'Invalid title' });
+      }
+
+      // Here you would add logic to save the task to your database
+      // For demonstration, we'll just send back the received title
+      return res.status(200).json({ message: 'Task added successfully', title });
+
+    } catch (error) {
+      return res.status(500).json({ error: 'Failed to add task' });
+    }
+  } else {
+    // Handle any other HTTP method
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
