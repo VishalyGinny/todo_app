@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Task from "./task";
 
 interface TaskInputProps {
   tasks: {
